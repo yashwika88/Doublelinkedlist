@@ -1,0 +1,80 @@
+import java.util.*;
+class Node{
+    int data;
+    Node prev;
+    Node next;
+    Node(int data){
+        this.data=data;
+        this.prev=null;
+        this.next=null;
+    }
+}
+
+class dll{
+    Node head;
+    dll(){
+        head=null;
+    }
+    void append(int data){
+        Node newnode=new Node(data);
+        if(head==null){
+            head=newnode;
+            return;
+        }
+        Node last=head;
+        while(last.next!=null){
+            last=last.next;
+        }
+        last.next=newnode;
+        newnode.prev=last;
+    }
+    void reverse(){
+        Node temp=null;
+        Node current=head;
+        
+        while(current!=null){
+            temp=current.prev;
+            current.prev=current.next;
+            current.next=temp;
+            current=current.prev;
+        }
+        if(temp!=null){
+            head=temp.prev;
+        }
+        
+    }
+    
+    void printList(){
+        Node temp=head;
+        while(temp!=null){
+            System.out.print(temp.data + " ");
+            temp=temp.next;
+        }
+        System.out.println();
+    }
+}
+
+public class Main{
+    public static void main(String[] args){
+        Scanner sc=new Scanner(System.in);
+        dll list=new dll();
+        int n=sc.nextInt();
+        System.out.println("Enter the elements: ");
+        for(int i=0;i<n;i++){
+            int data=sc.nextInt();
+            list.append(data);
+        }
+    
+       
+        list.reverse();
+        System.out.println("Reversed list : ");
+        list.printList();
+        
+    }
+}
+
+
+
+
+
+          
